@@ -19,3 +19,4 @@ class MahasiswaController extends Controller
         return redirect()->back();
     }
 }
+
