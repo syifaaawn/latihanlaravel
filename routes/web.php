@@ -28,7 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
     Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
-
     // ruangan
     Route::get('/ruangan', [RuanganController::class, 'index'])->name('ruangan.index');
     Route::post('/ruangan', [RuanganController::class, 'store'])->name('ruangan.store');
@@ -42,7 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
     Route::put('/matakuliah/{id}', [MatakuliahController::class, 'update'])->name('matakuliah.update');
     Route::delete('/matakuliah/{id}', [MatakuliahController::class, 'destroy'])->name('matakuliah.destroy');
-
 
     // dosen
     Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');

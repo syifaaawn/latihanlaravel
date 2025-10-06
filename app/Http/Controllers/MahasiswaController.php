@@ -4,19 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Kelas;
 
 class MahasiswaController extends Controller
 {
     public function index()
     {
-        $data = Mahasiswa::all();
-        return view('mahasiswa.index', compact('data'));
+       // $data = Mahasiswa::all();
+       // return view('mahasiswa.index', compact('data'));
+
+       $data = Mahasiswa::with('kelas')->get();
+       $kelas = Kelas::all();
+       return view('mahasiswa.index', compact('data','kelas'));
+
     }
 
     public function store(Request $request)
     {
-        Mahasiswa::create($request->only('nama', 'nim','jurusan'));
-        return redirect()->back();
+       $request->validate([
+        'nama' => 'required|string|max:255',
+        'nim' => 'required|string|max:50|unique:mahasiswa,nim',
+        'jurusan' => 'required|string|max:255',
+        'kelas_id' => 'required|exists:kelas,id',
+       ]);
+
+       Mahasiswa::create([
+        'nama' => $request->nama,
+        'nim' => $request->nim,
+        'jurusan' => $request->jurusan,
+        'kelas_id' => $request->kelas_id,
+       ]);
+
+       return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
+
     }
     
     // Edit
@@ -52,4 +72,5 @@ class MahasiswaController extends Controller
     }
 
 }
+
 
