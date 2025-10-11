@@ -28,3 +28,5 @@ class mahasiswa extends Model
 }
 
 
+
+

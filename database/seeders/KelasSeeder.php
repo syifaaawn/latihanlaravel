@@ -17,3 +17,4 @@ class KelasSeeder extends Seeder
         Kelas::create(['nama_kelas' => 'Kelas 24-003']);
     }
 }
+

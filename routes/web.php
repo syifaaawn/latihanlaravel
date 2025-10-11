@@ -5,6 +5,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\Auth\StudentRegisterController;
+use App\Http\Controllers\EkycController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +51,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/dosen/{id}/edit', [DosenController::class, 'edit'])->name('dosen.edit');
     Route::put('/dosen/{id}', [DosenController::class, 'update'])->name('dosen.update');
     Route::delete('/dosen/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
-    
+
+
 });
+
+    // register
+    Route::get('/register-mahasiswa', [StudentRegisterController::class, 'showRegistrationForm'])->name('register.mahasiswa');
+    Route::post('/register-mahasiswa', [StudentRegisterController::class,'register']);
+    
+    // ekyc step 1
+    Route::middleware(['auth'])->prefix('ekyc')->group(function () {
+    Route::get('step1', [EkycController::class, 'step1'])->name('ekyc.step1');
+    Route::post('step1', [EkycController::class, 'storeStep1'])->name('ekyc.storeStep1');
+
+   
+    });
 
 require __DIR__.'/auth.php';

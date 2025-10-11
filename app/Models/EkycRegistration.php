@@ -15,9 +15,10 @@ class EkycRegistration extends Model
         'nama',
         'tanggal_lahir',
         'alamat',
-        'no_hp',
-        'foto_ktp',
-        'selfie_ktp',
+        'file_ktp',
+        'file_kk',
+        'file_ijazah',
+        'file_selfie',
     ];
 
     // Relasi ke tabel users
@@ -26,3 +27,4 @@ class EkycRegistration extends Model
         return $this->belongsTo(User::class);
     }
 }
+

@@ -46,8 +46,6 @@
             </div>
         @endif
 
-
-
             {{-- Form Tambah Mahasiswa --}}
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
             <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -76,7 +74,6 @@
                 </form>
             </div>
         </div>
-
 
         {{-- List Mahasiswa --}}
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
