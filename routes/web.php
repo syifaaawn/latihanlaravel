@@ -64,7 +64,20 @@ Route::middleware('auth')->group(function () {
     Route::get('step1', [EkycController::class, 'step1'])->name('ekyc.step1');
     Route::post('step1', [EkycController::class, 'storeStep1'])->name('ekyc.storeStep1');
 
-   
+    // sementara redirect kosong untuk step2
+    Route::get('step2', function () {
+    return "Step 2: Upload Dokumen (belum dibuat)";
+    })->name('ekyc.step2');
+
+    // sementara redirect kosong untuk step2
+    Route::get('step2', function () {
+    return "Step 2: Upload Dokumen (belum dibuat)";
+    })->name('ekyc.step2');
+
+    // Jadi seperti ini :
+    Route::get('/ekyc/step2', [EkycController::class, 'step2'])->name('ekyc.step2');
+    Route::post('/ekyc/step2', [EkycController::class,
+    'storeStep2'])->name('ekyc.step2.store');
     });
 
 require __DIR__.'/auth.php';
