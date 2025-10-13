@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('ekyc_registrations', function (Blueprint $table) {
             $table->id();
@@ -19,8 +19,9 @@ return new class extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('file_ktp')->nullable();
+            $table->string('file_kk')->nullable();
+            $table->string('file_ijazah')->nullable();
             $table->string('file_selfie')->nullable();
-            $table->string('file_tanda_tangan')->nullable();
             $table->enum('status', ['draft', 'submitted'])->default('draft');
             $table->timestamps();
 
@@ -34,6 +35,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('ekyc_registrations');
-    }
+}
 };
-
