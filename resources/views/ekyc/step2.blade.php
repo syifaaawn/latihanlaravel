@@ -13,7 +13,8 @@
 
             <div>
                 <label class="block font-medium text-sm text-black-700 dark:text-black-300">Foto KTP</label>
-                <input type="file" name="file_ktp" accept="image/*" class="mt-1 block w-full border rounded-md shadow-sm">
+                <input type="file" name="file_ktp" accept="image/*" class="mt-1 block w-full border rounded-md shadow-sm"
+                       {{ !$data || !$data->file_ktp ? 'required' : '' }}>
 
                 @if($data && $data->file_ktp)
                     <p class="text-sm mt-1 text-gray-500">Sudah upload: {{ basename($data->file_ktp) }}</p>
@@ -23,7 +24,8 @@
 
             <div>
                 <label class="block font-medium text-sm text-black-700 dark:text-black-300">Selfie dengan KTP</label>
-                <input type="file" name="file_selfie" accept="image/*" class="mt-1 block w-full border rounded-md shadow-sm">
+                <input type="file" name="file_selfie" accept="image/*" class="mt-1 block w-full border rounded-md shadow-sm"
+                       {{ !$data || !$data->file_selfie ? 'required' : '' }}>
 
                 @if($data && $data->file_selfie)
                     <p class="text-sm mt-1 text-black-500">Sudah upload: {{ basename($data->file_selfie) }}</p>

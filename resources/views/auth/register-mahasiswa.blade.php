@@ -3,7 +3,7 @@
         <h2 class="text-xl font-semibold text-center mb-6 text-white ">Registrasi Calon Mahasiswa</h2>
 
         @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <div class="bg-red-100 text-red-700 p-3 rounded mb-4 text-center">
                 <ul class="text-sm list-disc ml-4">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>

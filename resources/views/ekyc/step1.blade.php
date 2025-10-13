@@ -23,22 +23,22 @@
             @csrf
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                <input type="text" name="nama" value="{{ old('nama', $ekyc->nama ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+                <input type="text" name="nama" value="{{ old('nama', $ekyc->nama ?? '') }}" class="w-full border-gray-300 rounded-md p-2" required>
             </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">NIK</label>
-                <input type="text" name="nik" value="{{ old('nik', $ekyc->nik ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+                <input type="text" name="nik" value="{{ old('nik', $ekyc->nik ?? '') }}" class="w-full border-gray-300 rounded-md p-2" required>
             </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $ekyc->tanggal_lahir ?? '') }}" class="w-full border-gray-300 rounded-md p-2">
+                <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir', $ekyc->tanggal_lahir ?? '') }}" class="w-full border-gray-300 rounded-md p-2" required>
             </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Alamat</label>
-                <textarea name="alamat" rows="3" class="w-full border-gray-300 rounded-md p-2">{{ old('alamat', $ekyc->alamat ?? '') }}</textarea>
+                <textarea name="alamat" rows="3" class="w-full border-gray-300 rounded-md p-2" required>{{ old('alamat', $ekyc->alamat ?? '') }}</textarea>
             </div>
 
             <div class="flex justify-end">

@@ -50,10 +50,10 @@ class EkycController extends Controller
     }
 
     public function step2()
-{
+    {
     $data = EkycRegistration::where('user_id', auth()->id())->first();
     return view('ekyc.step2', compact('data'));
-}
+    }
 
     public function storeStep2(Request $request)
     {

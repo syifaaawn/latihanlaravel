@@ -5,7 +5,7 @@
         </h2>
 
         @if (session('success'))
-            <div class="mb-4 text-green-600 text-center bg-green-100 p-3 rounded">
+            <div class="mb-4 text-green-600 text-center bg-green-100 p-3 rounded text-center">
                 {{ session('success') }}
             </div>
         @endif
@@ -17,27 +17,29 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SD</label>
                 <input type="text" name="asal_sd" value="{{ old('asal_sd', $data->asal_sd) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
             {{-- Asal SMP --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SMP</label>
                 <input type="text" name="asal_smp" value="{{ old('asal_smp', $data->asal_smp) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
             {{-- Asal SMA --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SMA</label>
                 <input type="text" name="asal_sma" value="{{ old('asal_sma', $data->asal_sma) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
             {{-- Upload KK --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Upload Kartu Keluarga (KK)</label>
-                <input type="file" name="file_kk" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <input type="file" name="file_kk" 
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                       {{ !$data || !$data->file_kk ? 'required' : '' }}>
                 @if ($data && $data->file_kk)
                     <a href="{{ asset('storage/'.$data->file_kk) }}" target="_blank"
                         class="text-blue-600 underline text-sm">Lihat KK</a>
@@ -47,7 +49,9 @@
             {{-- Upload Ijazah --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Upload Ijazah Terakhir</label>
-                <input type="file" name="file_ijazah" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <input type="file" name="file_ijazah" 
+                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                       {{ !$data || !$data->file_ijazah ? 'required' : '' }}>
                 @if ($data && $data->file_ijazah)
                     <a href="{{ asset('storage/'.$data->file_ijazah) }}" target="_blank"
                         class="text-blue-600 underline text-sm">Lihat Ijazah</a>
