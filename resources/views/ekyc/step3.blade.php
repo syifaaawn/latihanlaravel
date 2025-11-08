@@ -59,10 +59,10 @@
             </div>
 
             <div class="flex justify-between items-center mt-4">
-                <a href="{{ route('ekyc.step2') }}" class="text-sm text-gray-600 hover:text-gray-800">← Kembali ke Step 2</a>
+                <a href="{{ route('ekyc.step2') }}" class="text-sm text-black-600 hover:text-black-800">← Kembali ke Step 2</a>
                 <button type="submit"
                     class="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
-                    Simpan & Lanjut
+                    Simpan & Lanjut Step 4
                 </button>
             </div>
         </form>
