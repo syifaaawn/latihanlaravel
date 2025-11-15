@@ -14,7 +14,7 @@ class EkycController extends Controller
     {
         // Ambil data draft user jika sudah ada
         $ekyc = EkycRegistration::where('user_id', Auth::id())
-                ->where('status', 'draft')
+               // ->where('status', 'draft')
                 ->first();
 
         // Simpan session agar bisa lanjut ke step berikutnya
@@ -27,6 +27,12 @@ class EkycController extends Controller
 
     public function storeStep1(Request $request)
     {
+        
+        $checkStatus = EkycRegistration::where('user_id', Auth::id())->first();
+        if ($checkStatus && $checkStatus->status === 'submitted') {
+            return redirect()->route('ekyc.step2');
+        }
+
         $request->validate([
             'nama' => 'required|string|max:100',
             'nik' => 'required|string|max:20',
@@ -59,6 +65,12 @@ class EkycController extends Controller
 
     public function storeStep2(Request $request)
     {
+
+        $checkStatus = EkycRegistration::where('user_id', auth()->id())->first();
+        if ($checkStatus && $checkStatus->status === 'submitted') {
+            return redirect()->route('ekyc.step3');
+        }
+
         $validated = $request->validate([
             'file_ktp' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'file_selfie' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -87,6 +99,11 @@ class EkycController extends Controller
 
         public function storeStep3(Request $request)
         {
+            
+            $checkStatus = \App\Models\EkycRegistration::where('user_id', auth()->id())->first();
+            if ($checkStatus && $checkStatus->status === 'submitted') {
+                return redirect()->route('ekyc.step4');
+            }
             
         $request->validate([
             'asal_sd' => 'nullable|string|max:255',
@@ -145,6 +162,12 @@ class EkycController extends Controller
 
    public function storeStep4(Request $request)
 {
+    
+    $checkStatus = \App\Models\EkycRegistration::where('user_id', auth()->id())->first();
+    if ($checkStatus && $checkStatus->status === 'submitted') {
+        return redirect()->route('ekyc.step5');
+    }
+
     $request->validate([
         'alamatDomisili'   => 'nullable|string|max:255',
         'provinsi'         => 'nullable|string|max:100',
@@ -170,12 +193,40 @@ class EkycController extends Controller
     $data->kode_pos         = $request->kode_pos;
     $data->nama_ibu_kandung = $request->nama_ibu_kandung;
     $data->referensi_sumber = $request->referensi_sumber;
-    $data->save();
+    // $data->save();
 
-    return redirect()->route('ekyc.step4')->with('success', 'Data alamat dan informasi berhasil disimpan');
+   // return redirect()->route('ekyc.step4')->with('success', 'Data alamat dan informasi berhasil disimpan');
+
+   $data->status = 'submitted';
+   $data->save();
+
+   // Arahkan ke halaman sukses (step 5)
+   return redirect()->route('ekyc.step5')->with('success', 'Registrasi eKYC anda telah selesai!');
 }
 
+    public function step5()
+{
+    $data = EkycRegistration::where('user_id', auth()->id())->first();
+
+    if (!$data) {
+        return redirect()->route('ekyc.step1')->with('error', 'Data eKYC tidak ditemukan');
+    }
+
+    // Pastikan hanya user dengan status selesai yang bisa melihat halaman ini
+    if ($data->status != 'submitted') {
+        return redirect()->route('ekyc.step4')->with('error', 'Lengkapi data terlebih dahulu sebelum menyelesaikan eKYC');
+    }
+
+    return view('ekyc.step5', compact('data'));
+}
+
+    public function status()
+    {
+        $user = Auth::user();
+        $ekyc = \App\Models\EkycRegistration::where('user_id', $user->id)->first();
+        return view('ekyc.status', compact('ekyc'));
+    }
+
 
 
 }
-

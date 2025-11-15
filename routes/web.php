@@ -7,6 +7,7 @@ use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\Auth\StudentRegisterController;
 use App\Http\Controllers\EkycController;
+use App\Http\Controllers\Admin\EkycAdminController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/dosen/{id}', [DosenController::class, 'update'])->name('dosen.update');
     Route::delete('/dosen/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
 
+    Route::prefix('admin')->group(function () {
+    Route::get('/ekyc', [EkycAdminController::class, 'index'])->name('admin.ekyc.index');
+    Route::get('/ekyc/{id}', [EkycAdminController::class, 'show'])->name('admin.ekyc.show');
+    Route::put('/ekyc/{id}/verify', [EkycAdminController::class, 'verify'])->name('admin.ekyc.verify');
+});
+
 
 });
 
@@ -75,6 +82,13 @@ Route::middleware('auth')->group(function () {
     // ekyc  step 4
     Route::get('/ekyc/step4', [EkycController::class, 'showStep4'])->name('ekyc.step4');
     Route::post('/ekyc/step4', [EkycController::class,'storeStep4'])->name('ekyc.step4.store');
+
+    // ekyc step 5
+    Route::get('/ekyc/step5', [EkycController::class, 'Step5'])->name('ekyc.step5');
+
+    Route::get('status', [App\Http\Controllers\EkycController::class, 'status'])->name('ekyc.status');
+
+
     });
 
 require __DIR__.'/auth.php';
