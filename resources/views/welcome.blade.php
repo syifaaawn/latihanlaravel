@@ -16,11 +16,13 @@
                 <img src="{{ asset('images/logoLp.png') }}" alt="Logo" class="h-10 w-auto">
             </div>
 
-            <nav class="hidden md:flex gap-8 text-white font-medium">
-                <a href="#beranda" class="hover:text-blue-300">Beranda</a>
-                <a href="#program" class="hover:text-blue-300">Program</a>
-                <a href="#tentang" class="hover:text-blue-300">Tentang</a>
-                <a href="#kontak" class="hover:text-blue-300">Kontak</a>
+            <nav class="hidden md:flex gap-8 text-gray-700 dark:text-white font-medium">
+                @foreach ($navigation as $nav)
+                <a href="{{ $nav->url }}" 
+                class="text-gray-700 dark:text-white hover:text-blue-600 transition">
+                    {{ $nav->label }}
+                </a>
+                @endforeach
             </nav>
 
             <div class="flex gap-3">
@@ -41,9 +43,9 @@
                         Log in
                     </a>
 
-                    @if (Route::has('register'))
+                    @if (Route::has('register.mahasiswa'))
                     <a
-                        href="{{ route('register') }}"
+                        href="{{ route('register.mahasiswa') }}"
                         class="px-4 py-2 bg-white text-blue-900 rounded-lg font-medium hover:bg-blue-700"
                     >
                         Register
@@ -72,8 +74,8 @@
                 <div class="flex gap-4">
                     @if (Route::has('register'))
                     <a
-                        href="{{ route('register') }}"
-                        class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700">
+                        href="{{ route('register.mahasiswa') }}"
+                        class="px-6 py-3 bg-blue-900 text-white rounded-lg font-semibold text-lg hover:bg-blue-800">
                         Daftar Sekarang
                     </a>
                     @endif
@@ -88,7 +90,7 @@
             <!-- Image -->
             <div class="flex justify-center">
                 <!-- konten : banner image -->
-                <img src="{{ asset('uploads/' . ($landing['hero_image'] ?? 'default-hero.jpg')) }}"
+                <img src="{{ asset('storage/' . ($landing['hero_image'] ?? 'default-hero.jpg')) }}"
                     alt="Mahasiswa LP3I"
                     class="w-full max-w-2xl object-cover object-cover rounded-xl shadow-lg" />
             </div>
@@ -151,10 +153,11 @@
             <div>
                 <h4 class="text-xl font-semibold mb-3">Navigasi</h4>
                 <ul class="space-y-2 text-gray-100">
-                    <li><a href="#beranda" class="hover:underline">Beranda</a></li>
-                    <li><a href="#program" class="hover:underline">Program</a></li>
-                    <li><a href="#tentang" class="hover:underline">Tentang</a></li>
-                    <li><a href="#kontak" class="hover:underline">Kontak</a></li>
+                    @foreach ($footerNav as $itemNav)
+                        <li><a href="{{ $itemNav->url }}" class="hover: underline">
+                            {{ $itemNav->label }}
+                         </a></li>
+                @endforeach
                 </ul>
             </div>
 

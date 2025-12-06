@@ -34,6 +34,15 @@ class LandingController extends Controller
                 ->get();
         });
 
-        return view('welcome', compact('landing', 'programs', 'navigation', 'footer'));
+        $footerNav = Cache :: remember('landing_footer', 5, function () {
+            return LandingFooterLink :: where('group', 'nav')
+            ->orderBy('position')
+            ->get();
+
+        });
+
+
+
+        return view('welcome', compact('landing', 'programs', 'navigation', 'footer', 'footerNav'));
     }
 }

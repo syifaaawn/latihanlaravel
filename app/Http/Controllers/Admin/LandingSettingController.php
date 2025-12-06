@@ -20,6 +20,27 @@ class LandingSettingController extends Controller
         return view('admin.landing.settings.edit', compact('setting'));
     }
 
+     public function store(Request $request)
+    {
+        $request->validate([
+            'key'   => 'required|string',
+            'value' => 'nullable',
+        ]);
+
+        $value = $request->value;
+
+        LandingSetting::create([
+            'key'   => $request->key,
+            'value' => $value,
+            'type'  => 'text',  // default
+        ]);
+
+        return redirect()
+            ->route('admin.landing.settings.index')
+            ->with('success', 'Setting created successfully');
+    }
+
+
     public function update(Request $request, $id)
     {
         $setting = LandingSetting::findOrFail($id);
