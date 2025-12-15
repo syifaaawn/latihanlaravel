@@ -4,11 +4,16 @@
             Step 3 | Data Pendidikan & Upload Dokumen
         </h2>
 
-        @if (session('success'))
-            <div class="mb-4 text-green-600 text-center bg-green-100 p-3 rounded text-center">
-                {{ session('success') }}
+        @if ($errors->any())
+            <div class="mb-4 bg-red-100 text-red-700 p-3 rounded">
+                <ul class="list-disc pl-4">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
+
 
         <form method="POST" action="{{ route('ekyc.step3.store') }}" enctype="multipart/form-data" class="space-y-4">
             @csrf
@@ -17,21 +22,21 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SD</label>
                 <input type="text" name="asal_sd" value="{{ old('asal_sd', $data->asal_sd) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" >
             </div>
 
             {{-- Asal SMP --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SMP</label>
                 <input type="text" name="asal_smp" value="{{ old('asal_smp', $data->asal_smp) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
             </div>
 
             {{-- Asal SMA --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700">Asal Sekolah SMA</label>
                 <input type="text" name="asal_sma" value="{{ old('asal_sma', $data->asal_sma) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
             </div>
 
             {{-- Upload KK --}}

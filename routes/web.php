@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/ekyc/step4', [EkycController::class,'storeStep4'])->name('ekyc.step4.store');
 
     // ekyc step 5
-    Route::get('/ekyc/step5', [EkycController::class, 'Step5'])->name('ekyc.step5');
+    Route::get('/ekyc/step5', [EkycController::class, 'step5'])->name('ekyc.step5');
 
     Route::get('status', [App\Http\Controllers\EkycController::class, 'status'])->name('ekyc.status');
 
